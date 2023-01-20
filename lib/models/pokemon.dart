@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Pokemon extends ChangeNotifier {
-  final int? id;
+  final int id;
   final String name;
   final double height;
   final double weight;
@@ -14,8 +14,8 @@ class Pokemon extends ChangeNotifier {
   final double specialAttack;
   final double specialDefense;
 
-  Pokemon(
-    this.id, {
+  Pokemon({
+    required this.id,
     required this.name,
     required this.height,
     required this.weight,

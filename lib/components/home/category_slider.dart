@@ -20,7 +20,7 @@ class _CategorySliderState extends State<CategorySlider> {
     List<Widget> itemsList = [];
     responseData.forEach((category) {
       itemsList.add(CategoryButton(
-          nameCategory: category["categoria"], colorCategory: Color(randomColor())));
+          nameCategory: category["category"], colorCategory: Color(randomColor())));
     });
     setState(() {
       categoryList = itemsList;
@@ -54,7 +54,6 @@ class _CategorySliderState extends State<CategorySlider> {
             scrollDirection: Axis.horizontal,
             child: Container(
               alignment: Alignment.center,
-              color: stanColor,
               child: Padding(
                 padding: const EdgeInsets.only(left: 25),
                 child: Row(
@@ -71,18 +70,6 @@ class _CategorySliderState extends State<CategorySlider> {
   }
 
   int randomColor() {
-    final List<int> colors = [
-      -23505422,
-      -14049492,
-      -16777216,
-      -13251864,
-      -14583081,
-      -13777544,
-      -14587851,
-      -36958642,
-      -16925816,
-      -26964147,
-    ];
     final random = Random();
     final int index = random.nextInt(colors.length);
     return colors[index];

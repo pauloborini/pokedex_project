@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pokedex_inicie/components/type_button.dart';
+import 'package:pokedex_inicie/components/filter/gridview_filtered_pokemon.dart';
+import 'package:pokedex_inicie/components/filter/header_filter_page.dart';
 import 'package:pokedex_inicie/generated/assets.dart';
 import 'package:pokedex_inicie/pages/mobile/home_page.dart';
 import 'package:pokedex_inicie/utils/constants.dart';
@@ -44,33 +45,15 @@ class _FilterPageState extends State<FilterPage> {
               ],
             ),
             backgroundColor: Theme.of(context).backgroundColor,
-            extendBodyBehindAppBar: true,
             body: SingleChildScrollView(
               padding: EdgeInsets.zero,
               child: Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.only(top: 10),
                 child: Column(
                   children: [
-                    SizedBox(height: context.sizedDevice.height * 0.14),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 14),
-                      height: context.sizedDevice.height * 0.08,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: headerBackground,
-                      ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 8),
-                          child: Text(
-                            'Pokemons do tipo:',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 20, color: secondaryColor),
-                          ),
-                        ),
-                        TypeButton(text: widget.type)
-                      ]),
-                    ),
+                    HeaderFilterPage(type: widget.type),
+                    const SizedBox(height: 10),
+                    PokemonsFilteredView(type: widget.type),
                   ],
                 ),
               ),

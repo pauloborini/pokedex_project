@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_inicie/pages/mobile/filter_page.dart';
-import 'package:pokedex_inicie/repositories/pokemon_repository.dart';
-import 'package:provider/provider.dart';
 
 class CategoryButton extends StatelessWidget {
   final String nameCategory;
@@ -13,7 +11,6 @@ class CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemonRep = Provider.of<PokemonRepository>(context);
     return Padding(
       padding: const EdgeInsets.only(right: 7),
       child: InkWell(

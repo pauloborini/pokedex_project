@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_inicie/components/type_button.dart';
 import 'package:pokedex_inicie/models/pokemon.dart';
@@ -42,13 +41,19 @@ class PokemonItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Spacer(),
-                  Text(
-                      pokemon.name.substring(0, 1).toUpperCase() +
-                          pokemon.name.substring(1, pokemon.name.length),
-                      style: const TextStyle(
-                          color: secondaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16)),
+                  SizedBox(
+                    width: 80,
+                    child: AutoSizeText(
+                        pokemon.name.substring(0, 1).toUpperCase() +
+                            pokemon.name.substring(1, pokemon.name.length),
+                        overflow: TextOverflow.ellipsis,
+                        minFontSize: 10,
+                        maxLines: 1,
+                        style: const TextStyle(
+                            color: secondaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16)),
+                  ),
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: TypeButton(

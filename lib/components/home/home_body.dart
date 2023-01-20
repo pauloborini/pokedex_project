@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_inicie/components/home/category_slider.dart';
 import 'package:pokedex_inicie/components/home/gridview_pokemon.dart';
-import 'package:pokedex_inicie/components/home/header_widget.dart';
+import 'package:pokedex_inicie/components/home/header_home_page.dart';
 import 'package:pokedex_inicie/generated/assets.dart';
 import 'package:pokedex_inicie/utils/constants.dart';
 
@@ -23,10 +23,18 @@ class _HomeBodyState extends State<HomeBody> {
       child: Stack(children: [
         Positioned(
           right: 0,
-          top: 118,
+          top: 2,
           child: Image.asset(
             Assets.imagesCirclesElement,
-            width: 55,
+            width: 58,
+          ),
+        ),
+        Positioned(
+          left: 8,
+          top: 220,
+          child: Image.asset(
+            Assets.imagesCirclesElement,
+            width: 58,
           ),
         ),
         SingleChildScrollView(
@@ -34,11 +42,10 @@ class _HomeBodyState extends State<HomeBody> {
           child: Container(
             constraints: const BoxConstraints(maxWidth: maxWidth),
             child: Column(
-              children: [
-                SizedBox(height: context.sizedDevice.height * 0.17),
-                const HeaderWidget(),
-                const CategorySlider(),
-                const PokemonsView(),
+              children: const [
+                HeaderWidget(),
+                CategorySlider(),
+                PokemonsView(),
               ],
             ),
           ),

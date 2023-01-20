@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             backgroundColor: Theme.of(context).backgroundColor,
-            extendBodyBehindAppBar: true,
+            extendBodyBehindAppBar: false,
             body: body.elementAt(widget.currentIndex),
             bottomNavigationBar: ClipRRect(
               borderRadius: const BorderRadius.only(

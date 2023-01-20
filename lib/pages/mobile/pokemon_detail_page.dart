@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pokedex_inicie/components/pokemon_detail/skills_component.dart';
 import 'package:pokedex_inicie/components/type_button.dart';
 import 'package:pokedex_inicie/generated/assets.dart';
 import 'package:pokedex_inicie/models/pokemon.dart';
+import 'package:pokedex_inicie/repositories/favorites_repository.dart';
 import 'package:pokedex_inicie/repositories/pokemon_repository.dart';
 import 'package:pokedex_inicie/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -24,12 +25,14 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
   getPokemonDesc() async {
     loaded.value = false;
     pokemonDesc = await Provider.of<PokemonRepository>(context)
-        .getPokemonDescription(widget.pokemon.id!);
+        .getPokemonDescription(widget.pokemon.id);
     loaded.value = true;
   }
 
   @override
   Widget build(BuildContext context) {
+    final favoritesRep = Provider.of<FavoritesRepository>(context);
+    final favoriteList = favoritesRep.favoritesList;
     getPokemonDesc();
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -96,14 +99,23 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold)),
                                       const Spacer(),
-                                      const Padding(
-                                        padding: EdgeInsets.only(right: 4),
-                                        child: Icon(
-                                          FontAwesomeIcons.heart,
-                                          color: Colors.grey,
-                                          size: 20,
-                                        ),
-                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.only(right: 4),
+                                          child: IconButton(
+                                            onPressed: () {
+                                              favoritesRep.saveFavorite(widget.pokemon);
+                                            },
+                                            icon: !favoriteList.any((pokemon) =>
+                                                    pokemon.id == widget.pokemon.id)
+                                                ? const Icon(
+                                                    CupertinoIcons.heart,
+                                                    color: Colors.black38,
+                                                  )
+                                                : const Icon(
+                                                    CupertinoIcons.heart_fill,
+                                                    color: Colors.red,
+                                                  ),
+                                          )),
                                       const Icon(Icons.share,
                                           color: Colors.black38, size: 20)
                                     ],
