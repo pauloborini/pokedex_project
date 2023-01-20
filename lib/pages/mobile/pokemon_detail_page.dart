@@ -8,6 +8,7 @@ import 'package:pokedex_inicie/repositories/favorites_repository.dart';
 import 'package:pokedex_inicie/repositories/pokemon_repository.dart';
 import 'package:pokedex_inicie/utils/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:social_share/social_share.dart';
 
 class PokemonDetailPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -27,6 +28,13 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
     pokemonDesc = await Provider.of<PokemonRepository>(context)
         .getPokemonDescription(widget.pokemon.id);
     loaded.value = true;
+  }
+
+  sharePokemon(Pokemon pokemon) {
+    String shareText = "Veja esse Pokémon incrível: ${pokemon.name} #${pokemon.id} "
+        "#pokedexinicie";
+    SocialShare.shareOptions(shareText);
+    print('compartilhou');
   }
 
   @override
@@ -116,8 +124,13 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
                                                     color: Colors.red,
                                                   ),
                                           )),
-                                      const Icon(Icons.share,
-                                          color: Colors.black38, size: 20)
+                                      IconButton(
+                                        icon: const Icon(Icons.share,
+                                            color: Colors.black38, size: 20),
+                                        onPressed: () {
+                                          sharePokemon(widget.pokemon);
+                                        },
+                                      )
                                     ],
                                   ),
                                   Padding(
