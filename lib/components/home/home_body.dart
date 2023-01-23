@@ -43,7 +43,7 @@ class _HomeBodyState extends State<HomeBody> {
             constraints: const BoxConstraints(maxWidth: maxWidth),
             child: Column(
               children: const [
-                HeaderWidget(),
+                HeaderHomePage(),
                 CategorySlider(),
                 PokemonsView(),
               ],

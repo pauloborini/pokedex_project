@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_inicie/components/custom_button.dart';
 import 'package:pokedex_inicie/generated/assets.dart';
-import 'package:pokedex_inicie/pages/users/net_check.dart';
+import 'package:pokedex_inicie/pages/checkers/net_check.dart';
 import 'package:pokedex_inicie/utils/constants.dart';
 import 'package:pokedex_inicie/utils/responsive.dart';
 

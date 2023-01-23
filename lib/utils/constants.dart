@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 const padding = 20.0;
-const duration = Duration(seconds: 1);
+const duration = Duration(milliseconds: 500);
 const maxWidth = 1440.0;
 
 const Color stanColor = Color.fromARGB(255, 246, 246, 246);
 const Color headerBackground = Color.fromRGBO(241, 176, 179, 0.1);
 const Color pokeItemBackColor = Color.fromARGB(255, 253, 253, 253);
+const Color backWeb = Color.fromARGB(255, 239, 244, 250);
 const Color primaryColor = Color(0xFFEA686D);
 const Color secondaryColor = Color(0xFF2F3E77);
 const Color descriptionColor = Color(0xFF233674);

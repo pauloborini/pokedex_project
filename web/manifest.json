@@ -1,11 +1,11 @@
 {
-    "name": "pokedex_inicie",
-    "short_name": "pokedex_inicie",
+    "name": "pokedex_project",
+    "short_name": "pokedex_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Pokedex Inicie Educação",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

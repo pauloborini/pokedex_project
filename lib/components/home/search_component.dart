@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pokedex_inicie/models/pokemon.dart';
@@ -7,19 +9,35 @@ import 'package:pokedex_inicie/repositories/pokemon_repository.dart';
 import 'package:pokedex_inicie/utils/constants.dart';
 import 'package:provider/provider.dart';
 
-class SearchComponent extends StatelessWidget {
-  final bool isMobile;
+import '../../utils/responsive.dart';
 
-  SearchComponent({super.key, this.isMobile = true});
+class SearchComponent extends StatelessWidget {
+  SearchComponent({super.key});
 
   final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final double width = context.sizedDevice.width;
     final pokemonRep = Provider.of<PokemonRepository>(context);
     return SizedBox(
-      height: isMobile ? 31 : 45,
-      width: context.sizedDevice.width * (isMobile ? 0.41 : 1),
+      height: !kIsWeb
+          ? 31
+          : Responsive.isTest(context)
+              ? 36
+              : Responsive.isSmall(context)
+                  ? 40
+                  : Responsive.isMedium(context)
+                      ? 34
+                      : 44,
+      width: width *
+          (!kIsWeb
+              ? 0.41
+              : Responsive.isTest(context)
+                  ? 0.7
+                  : Responsive.isSmall(context)
+                      ? 0.7
+                      : 0.32),
       child: Row(
         children: [
           Expanded(
@@ -35,14 +53,15 @@ class SearchComponent extends StatelessWidget {
                         offset: Offset(0.0, 4.0),
                         blurRadius: 15)
                   ]),
-              child: TextField(
+              child: TextFormField(
                 controller: _searchController,
+                textAlign: TextAlign.left,
                 style: const TextStyle(
                   color: secondaryColor,
                 ),
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(bottom: isMobile ? 17 : 8, left: 5)),
+                    contentPadding: EdgeInsets.only(bottom: !kIsWeb ? 12 : 8, left: 5)),
               ),
             ),
           ),
@@ -63,7 +82,14 @@ class SearchComponent extends StatelessWidget {
               }
             },
             child: Container(
-              width: isMobile ? 40 : 106,
+              padding: const EdgeInsets.all(4),
+              width: !kIsWeb
+                  ? 40
+                  : Responsive.isTest(context)
+                      ? width * 0.12
+                      : Responsive.isSmall(context)
+                          ? width * 0.12
+                          : width * 0.08,
               decoration: const BoxDecoration(
                   color: primaryColor,
                   borderRadius: BorderRadius.only(
@@ -73,14 +99,23 @@ class SearchComponent extends StatelessWidget {
                         color: primaryColor, offset: Offset(0.0, 4.0), blurRadius: 15)
                   ]),
               alignment: Alignment.center,
-              child: isMobile
+              child: !kIsWeb
                   ? const Icon(FontAwesomeIcons.magnifyingGlass,
                       color: Colors.white, size: 16)
-                  : const Text(
-                      "Buscar",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
-                    ),
+                  : Responsive.isTest(context)
+                      ? const Icon(FontAwesomeIcons.magnifyingGlass,
+                          color: Colors.white, size: 16)
+                      : const FittedBox(
+                          child: AutoSizeText(
+                            "Buscar",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white),
+                            minFontSize: 10,
+                            maxLines: 1,
+                          ),
+                        ),
             ),
           )
         ],

@@ -15,10 +15,12 @@ class FavoritesView extends StatelessWidget {
       child: Column(
         children: const [
           Responsive(
-              small: GridViewFavoritesPokemon(crossAxisCount: 1, childAspectRatio: 1.7),
-              medium: GridViewFavoritesPokemon(crossAxisCount: 2, childAspectRatio: 1.5),
-              large: GridViewFavoritesPokemon(crossAxisCount: 3, childAspectRatio: 1.5),
-              xlarge: GridViewFavoritesPokemon(crossAxisCount: 5, childAspectRatio: 1.5)),
+            test: GridViewFavoritesPokemon(crossAxisCount: 1, childAspectRatio: 1.7),
+            small: GridViewFavoritesPokemon(crossAxisCount: 1, childAspectRatio: 1.7),
+            medium: GridViewFavoritesPokemon(crossAxisCount: 2, childAspectRatio: 1.5),
+            large: GridViewFavoritesPokemon(crossAxisCount: 3, childAspectRatio: 1.5),
+            xlarge: GridViewFavoritesPokemon(crossAxisCount: 5, childAspectRatio: 1.5),
+          ),
         ],
       ),
     );

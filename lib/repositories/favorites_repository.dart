@@ -32,7 +32,7 @@ class FavoritesRepository extends ChangeNotifier {
   List<Pokemon> get favoritesList => [..._favoritesList];
 
   saveFavorite(Pokemon pokemon) {
-    if (!_favoritesList.contains(pokemon)) {
+    if (!_favoritesList.any((p) => p.id == pokemon.id)) {
       _favoritesList.add(pokemon);
       box.put(pokemon.id, pokemon);
     } else {
@@ -43,7 +43,6 @@ class FavoritesRepository extends ChangeNotifier {
 
   removeFavorite(Pokemon pokemon) {
     _favoritesList.remove(pokemon);
-    box.delete(pokemon.id);
-    notifyListeners();
+    box.delete(pokemon);
   }
 }

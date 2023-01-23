@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_inicie/utils/responsive.dart';
+
+import '../../components/home/gridview_pokemon.dart';
+import '../../components/web/header_home_web.dart';
+import '../../generated/assets.dart';
+import '../../utils/constants.dart';
+import '../../utils/responsive.dart';
 
 class HomePageWeb extends StatelessWidget {
   const HomePageWeb({Key? key}) : super(key: key);
@@ -8,13 +13,47 @@ class HomePageWeb extends StatelessWidget {
   Widget build(BuildContext context) {
     return Responsive.isXTest(context)
         ? Scaffold(
-            backgroundColor: Theme.of(context).backgroundColor,
+            body: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                    const Color(0xFFEFF4FA),
+                    const Color(0xFFEFF4FA),
+                    const Color(0xFFEFF4FA),
+                    const Color(0xFFEFF4FA).withOpacity(0),
+                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                )
+              ],
+            ),
           )
         : Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).backgroundColor,
+            body: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                    const Color(0xFFEFF4FA),
+                    const Color(0xFFEFF4FA),
+                    const Color(0xFFEFF4FA),
+                    const Color(0xFFEFF4FA).withOpacity(0),
+                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                ),
+                SingleChildScrollView(
+                  child: Center(
+                    child: Container(
+                      constraints: const BoxConstraints(maxWidth: maxWidth),
+                      child: Column(
+                        children: const [
+                          HeaderHomeWeb(),
+                          PokemonsView(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            backgroundColor: Theme.of(context).backgroundColor,
           );
   }
 }

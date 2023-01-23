@@ -16,14 +16,17 @@ class PokemonsFilteredView extends StatelessWidget {
       child: Column(
         children: [
           Responsive(
-              small: GridViewPokemonFiltered(
-                  crossAxisCount: 1, childAspectRatio: 1.7, text: type),
-              medium: GridViewPokemonFiltered(
-                  crossAxisCount: 2, childAspectRatio: 1.5, text: type),
-              large: GridViewPokemonFiltered(
-                  crossAxisCount: 3, childAspectRatio: 1.5, text: type),
-              xlarge: GridViewPokemonFiltered(
-                  crossAxisCount: 5, childAspectRatio: 1.5, text: type)),
+            test: GridViewPokemonFiltered(
+                crossAxisCount: 1, childAspectRatio: 1.7, text: type),
+            small: GridViewPokemonFiltered(
+                crossAxisCount: 1, childAspectRatio: 1.7, text: type),
+            medium: GridViewPokemonFiltered(
+                crossAxisCount: 2, childAspectRatio: 1.5, text: type),
+            large: GridViewPokemonFiltered(
+                crossAxisCount: 3, childAspectRatio: 1.5, text: type),
+            xlarge: GridViewPokemonFiltered(
+                crossAxisCount: 5, childAspectRatio: 1.5, text: type),
+          ),
         ],
       ),
     );

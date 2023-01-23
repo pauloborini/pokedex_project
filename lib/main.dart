@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final connectivityResult = await (Connectivity().checkConnectivity());
-  await HiveConfig.start();
+  !kIsWeb ? await HiveConfig.start() : null;
   runApp(MyApp(connectivityResult: connectivityResult));
 }
 
@@ -24,9 +24,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orientation =
-        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    kIsWeb ? null : orientation;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => PokemonRepository()),
@@ -34,7 +31,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         scrollBehavior: MyCustomScrollBehavior(),
-        title: 'Inicie Pokedex',
+        title: 'Pokedex Inicie',
         theme: ThemeData(
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                 showUnselectedLabels: true,

@@ -72,6 +72,37 @@ class PokemonRepository with ChangeNotifier {
     }
   }
 
+  getPreviousTen() async {
+    if (offset >= 10) {
+      _pokemonBaseList.clear();
+      _pokemonList.clear();
+      offset -= 10;
+      String uri = 'https://pokeapi.co/api/v2/pokemon/?offset=$offset&limit=10';
+      final response = await http.get(Uri.parse(uri));
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> json = jsonDecode(response.body);
+        final List<dynamic> pokemonAPI = json["results"];
+        for (int i = 0; i < pokemonAPI.length; i++) {
+          final pokemonBase = pokemonAPI[i];
+          final pokeBase =
+              PokemonBase(name: pokemonBase["name"], url: pokemonBase["url"]);
+          _pokemonBaseList.add(pokeBase);
+          String url = pokeBase.url;
+          String newUrl = url.replaceFirst(RegExp(r'/$'), '');
+          Uri uri = Uri.parse(newUrl);
+          String idText = uri.pathSegments.last;
+          final int id = int.parse(idText);
+          final pokemon = await getPokemonDetails(id);
+          _pokemonList.add(pokemon);
+        }
+      } else {
+        throw Exception('Erro ao carregar Pokemons');
+      }
+    } else {
+      return;
+    }
+  }
+
   Future<Pokemon> getPokemonDetails(int id) async {
     final response = await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/$id'));
     if (response.statusCode == 200) {
@@ -81,7 +112,7 @@ class PokemonRepository with ChangeNotifier {
       final Pokemon pokemon = Pokemon(
           id: json["id"],
           name: json["name"],
-          height: json["height"] / 10,
+          height: json["height"] * 10,
           weight: json["weight"] / 10,
           image: json["sprites"]["other"]["home"]["front_default"] ??
               'https://cdn-icons-png.flaticon.com/512/4063/4063871.png',
@@ -127,7 +158,7 @@ class PokemonRepository with ChangeNotifier {
       final Pokemon pokemon = Pokemon(
           id: json["id"],
           name: json["name"],
-          height: json["height"] / 10,
+          height: json["height"] * 10,
           weight: json["weight"] / 10,
           image: json["sprites"]["other"]["home"]["front_default"] ??
               'https://cdn-icons-png.flaticon.com/512/4063/4063871.png',
