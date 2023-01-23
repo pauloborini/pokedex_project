@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../components/home/gridview_pokemon.dart';
 import '../../components/web/header_home_web.dart';
-import '../../generated/assets.dart';
 import '../../utils/constants.dart';
 import '../../utils/responsive.dart';
 

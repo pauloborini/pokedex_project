@@ -59,7 +59,7 @@ class SearchComponent extends StatelessWidget {
                 style: const TextStyle(
                   color: secondaryColor,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.only(bottom: !kIsWeb ? 12 : 8, left: 5)),
               ),
@@ -70,7 +70,7 @@ class SearchComponent extends StatelessWidget {
               try {
                 final Pokemon pokemon =
                     await pokemonRep.searchPokemon(_searchController.text.trim());
-                if (pokemon != null) {
+                if (pokemon.id != 0) {
                   Navigator.push(
                       context,
                       CupertinoPageRoute(

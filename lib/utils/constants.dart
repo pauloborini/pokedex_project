@@ -37,3 +37,12 @@ final List<int> colors = [
   -16925816,
   -26964147,
 ];
+
+final colorsSkills = [
+  const Color(0xFFC4F789),
+  const Color(0xFFF7802A),
+  const Color(0xFF49D0B0),
+  const Color(0xFFEA686D),
+  const Color(0xFF85ABD9),
+  const Color(0xFFFDEF51),
+];

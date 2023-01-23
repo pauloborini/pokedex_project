@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pokedex_inicie/components/pokemon_detail/row_detail_web.dart';
 import 'package:pokedex_inicie/components/pokemon_detail/skills_component.dart';
 import 'package:pokedex_inicie/components/type_button.dart';
 import 'package:pokedex_inicie/generated/assets.dart';
@@ -12,6 +13,9 @@ import 'package:pokedex_inicie/utils/constants.dart';
 import 'package:pokedex_inicie/utils/responsive.dart';
 import 'package:provider/provider.dart';
 import 'package:social_share/social_share.dart';
+
+import '../../components/pokemon_detail/column_detail_web.dart';
+import '../web/home_page_web.dart';
 
 class PokemonDetailPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -50,15 +54,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
             ? returnScaffoldMobile()
             : returnScaffoldWeb();
   }
-
-  final colorsSkills = [
-    const Color(0xFFC4F789),
-    const Color(0xFFF7802A),
-    const Color(0xFF49D0B0),
-    const Color(0xFFEA686D),
-    const Color(0xFF85ABD9),
-    const Color(0xFFFDEF51),
-  ];
 
   Scaffold returnScaffoldMobile() {
     final favoritesRep = Provider.of<FavoritesRepository>(context);
@@ -181,29 +176,41 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
                                         fontWeight: FontWeight.w600)),
                                 const SizedBox(height: 20),
                                 SkillsComponent(
-                                    stat: 'Vida',
-                                    color: colorsSkills[0],
-                                    value: widget.pokemon.hp + 50),
+                                  stat: 'Vida',
+                                  color: colorsSkills[0],
+                                  value: widget.pokemon.hp + 50,
+                                  valueText: '',
+                                ),
                                 SkillsComponent(
-                                    stat: 'Defesa',
-                                    color: colorsSkills[1],
-                                    value: widget.pokemon.defense + 50),
+                                  stat: 'Defesa',
+                                  color: colorsSkills[1],
+                                  value: widget.pokemon.defense + 50,
+                                  valueText: '',
+                                ),
                                 SkillsComponent(
-                                    stat: 'Ataque',
-                                    color: colorsSkills[3],
-                                    value: widget.pokemon.attack + 50),
+                                  stat: 'Ataque',
+                                  color: colorsSkills[3],
+                                  value: widget.pokemon.attack + 50,
+                                  valueText: '',
+                                ),
                                 SkillsComponent(
-                                    stat: 'Velocidade',
-                                    color: colorsSkills[2],
-                                    value: widget.pokemon.speed + 50),
+                                  stat: 'Velocidade',
+                                  color: colorsSkills[2],
+                                  value: widget.pokemon.speed + 50,
+                                  valueText: '',
+                                ),
                                 SkillsComponent(
-                                    stat: 'Ataque Especial',
-                                    color: colorsSkills[4],
-                                    value: widget.pokemon.specialAttack + 50),
+                                  stat: 'Ataque Especial',
+                                  color: colorsSkills[4],
+                                  value: widget.pokemon.specialAttack + 50,
+                                  valueText: '',
+                                ),
                                 SkillsComponent(
-                                    stat: 'Defesa Especial',
-                                    color: colorsSkills[5],
-                                    value: widget.pokemon.specialDefense + 50),
+                                  stat: 'Defesa Especial',
+                                  color: colorsSkills[5],
+                                  value: widget.pokemon.specialDefense + 50,
+                                  valueText: '',
+                                ),
                               ],
                             ),
                           )
@@ -220,7 +227,15 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(backgroundColor: Colors.transparent, leading: const SizedBox()),
+      appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    CupertinoPageRoute(builder: (context) => const HomePageWeb()));
+              },
+              icon:
+                  const Icon(Icons.arrow_back_ios_new, size: 30, color: secondaryColor))),
       body: Stack(
         children: [
           Container(
@@ -232,17 +247,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
               const Color(0xFFEFF4FA).withOpacity(0),
             ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           ),
-          Responsive.isXLarge(context)
-              ? Positioned(
-                  left: 150,
-                  top: 450,
-                  child: Image.asset(
-                    Assets.imagesCirclesElement,
-                    fit: BoxFit.fill,
-                    width: 110,
-                  ),
-                )
-              : const SizedBox(),
           Responsive.isXLarge(context)
               ? Positioned(
                   right: 0,
@@ -260,146 +264,42 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
                 return (isLoaded && pokemonDesc.length > 10)
                     ? SingleChildScrollView(
                         child: Center(
-                          child: Container(
-                            margin: const EdgeInsets.fromLTRB(50, 50, 50, 20),
-                            constraints: const BoxConstraints(maxWidth: maxWidth),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: context.sizedDevice.width * 0.35,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 110,
-                                        child: Image.asset(Assets.imagesInicieLogo),
+                          child: Stack(
+                            children: [
+                              Responsive.isXLarge(context)
+                                  ? Positioned(
+                                      left: -50,
+                                      top: 450,
+                                      child: Image.asset(
+                                        Assets.imagesCirclesElement,
+                                        fit: BoxFit.fill,
+                                        width: 100,
                                       ),
-                                      Text(
-                                          widget.pokemon.name
-                                                  .substring(0, 1)
-                                                  .toUpperCase() +
-                                              widget.pokemon.name.substring(
-                                                  1, widget.pokemon.name.length),
-                                          style: const TextStyle(
-                                              color: descriptionColor,
-                                              fontSize: 35,
-                                              fontWeight: FontWeight.bold)),
-                                      const SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          Text("Cod: #${widget.pokemon.id}",
-                                              style: const TextStyle(
-                                                  fontSize: 22, color: descriptionColor)),
-                                          const Spacer(),
-                                          const Padding(
-                                            padding: EdgeInsets.only(right: 17),
-                                            child: Text('Tipo:',
-                                                style: TextStyle(
-                                                    fontSize: 22,
-                                                    color: descriptionColor)),
-                                          ),
-                                          TypeButton(text: widget.pokemon.type),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 23),
-                                      const Text("Descrição",
-                                          style: TextStyle(
-                                              color: descriptionColor,
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold)),
-                                      const SizedBox(height: 8),
-                                      SizedBox(
-                                        width: context.sizedDevice.width * 0.33,
-                                        child: AutoSizeText(
-                                            '"${pokemonDesc.replaceAll("\n", "")}"',
-                                            maxLines: 5,
-                                            textAlign: TextAlign.left,
-                                            minFontSize: 12,
-                                            style: const TextStyle(
-                                                color: descriptionColor,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600)),
-                                      ),
-                                      const SizedBox(height: 25),
-                                      const Text("Informações",
-                                          style: TextStyle(
-                                              color: descriptionColor,
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold)),
-                                      const SizedBox(height: 11),
-                                      Row(
-                                        children: [
-                                          const AutoSizeText("Altura",
-                                              style: TextStyle(
-                                                  color: descriptionColor,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600)),
-                                          const Spacer(),
-                                          AutoSizeText("${widget.pokemon.height}cm",
-                                              style: const TextStyle(
-                                                  color: descriptionColor,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600)),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Row(
-                                        children: [
-                                          const AutoSizeText("Peso",
-                                              style: TextStyle(
-                                                  color: descriptionColor,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600)),
-                                          const Spacer(),
-                                          AutoSizeText("${widget.pokemon.weight}Kg",
-                                              style: const TextStyle(
-                                                  color: descriptionColor,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600)),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 25),
-                                      SkillsComponent(
-                                          stat: 'Vida',
-                                          color: colorsSkills[0],
-                                          value: widget.pokemon.hp + 50),
-                                      SkillsComponent(
-                                          stat: 'Defesa',
-                                          color: colorsSkills[1],
-                                          value: widget.pokemon.defense + 50),
-                                      SkillsComponent(
-                                          stat: 'Ataque',
-                                          color: colorsSkills[3],
-                                          value: widget.pokemon.attack + 50),
-                                      SkillsComponent(
-                                          stat: 'Velocidade',
-                                          color: colorsSkills[2],
-                                          value: widget.pokemon.speed + 50),
-                                      SkillsComponent(
-                                          stat: 'Ataque Especial',
-                                          color: colorsSkills[4],
-                                          value: widget.pokemon.specialAttack + 50),
-                                      SkillsComponent(
-                                          stat: 'Defesa Especial',
-                                          color: colorsSkills[5],
-                                          value: widget.pokemon.specialDefense + 50)
-                                    ],
-                                  ),
-                                ),
-                                const Spacer(),
-                                Expanded(
-                                  flex: 8,
-                                  child: SizedBox(
-                                    child: Image.network(
-                                      widget.pokemon.image,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                const Spacer(),
-                              ],
-                            ),
+                                    )
+                                  : const SizedBox(),
+                              Container(
+                                  margin: const EdgeInsets.fromLTRB(50, 50, 50, 20),
+                                  constraints: const BoxConstraints(maxWidth: maxWidth),
+                                  child: Responsive.isTest(context)
+                                      ? ColumnDetailWeb(
+                                          pokemon: widget.pokemon,
+                                          pokemonDesc: pokemonDesc)
+                                      : Responsive.isSmall(context)
+                                          ? ColumnDetailWeb(
+                                              pokemon: widget.pokemon,
+                                              pokemonDesc: pokemonDesc)
+                                          : Responsive.isMedium(context)
+                                              ? ColumnDetailWeb(
+                                                  pokemon: widget.pokemon,
+                                                  pokemonDesc: pokemonDesc)
+                                              : Responsive.isLarge(context)
+                                                  ? RowDetailWeb(
+                                                      pokemon: widget.pokemon,
+                                                      pokemonDesc: pokemonDesc)
+                                                  : RowDetailWeb(
+                                                      pokemon: widget.pokemon,
+                                                      pokemonDesc: pokemonDesc)),
+                            ],
                           ),
                         ),
                       )

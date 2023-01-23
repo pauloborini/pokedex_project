@@ -2,7 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pokedex_inicie/database/hive_config.dart';
 import 'package:pokedex_inicie/pages/mobile/start_page.dart';
 import 'package:pokedex_inicie/pages/web/home_page_web.dart';
 import 'package:pokedex_inicie/repositories/favorites_repository.dart';
@@ -13,7 +12,6 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final connectivityResult = await (Connectivity().checkConnectivity());
-  !kIsWeb ? await HiveConfig.start() : null;
   runApp(MyApp(connectivityResult: connectivityResult));
 }
 

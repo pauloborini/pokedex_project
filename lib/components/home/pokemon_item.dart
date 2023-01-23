@@ -18,10 +18,15 @@ class PokemonItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(
-                builder: (context) => PokemonDetailPage(pokemon: pokemon)));
+        !kIsWeb
+            ? Navigator.push(
+                context,
+                CupertinoPageRoute(
+                    builder: (context) => PokemonDetailPage(pokemon: pokemon)))
+            : Navigator.pushReplacement(
+                context,
+                CupertinoPageRoute(
+                    builder: (context) => PokemonDetailPage(pokemon: pokemon)));
       },
       child: Container(
         width: 160,
@@ -108,14 +113,14 @@ class PokemonItem extends StatelessWidget {
                     minFontSize: 14,
                     maxLines: 1,
                     style: const TextStyle(
-                        color: secondaryColor,
+                        color: descriptionColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 22)),
               ),
               const Spacer(),
               Text(
                 "#${pokemon.id}",
-                style: const TextStyle(fontSize: 16, color: secondaryColor),
+                style: const TextStyle(fontSize: 16, color: descriptionColor),
               ),
             ],
           ),
@@ -127,23 +132,39 @@ class PokemonItem extends StatelessWidget {
         Row(
           children: [
             const AutoSizeText(
-              'Altura',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              'Altura:',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: descriptionColor,
+              ),
             ),
             const Spacer(),
             AutoSizeText('${pokemon.height}cm',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600))
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: descriptionColor,
+                ))
           ],
         ),
         Row(
           children: [
             const AutoSizeText(
-              'Peso',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              'Peso:',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: descriptionColor,
+              ),
             ),
             const Spacer(),
             AutoSizeText('${pokemon.weight}Kg',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600))
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: descriptionColor,
+                ))
           ],
         )
       ],

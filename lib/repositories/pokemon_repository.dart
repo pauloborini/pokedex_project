@@ -112,8 +112,8 @@ class PokemonRepository with ChangeNotifier {
       final Pokemon pokemon = Pokemon(
           id: json["id"],
           name: json["name"],
-          height: json["height"] * 10,
-          weight: json["weight"] / 10,
+          height: json["height"] * 10.toDouble(),
+          weight: json["weight"] / 10.toDouble(),
           image: json["sprites"]["other"]["home"]["front_default"] ??
               'https://cdn-icons-png.flaticon.com/512/4063/4063871.png',
           type: pokemonTypes.first,
@@ -125,7 +125,7 @@ class PokemonRepository with ChangeNotifier {
           specialDefense: json["stats"][1]["base_stat"].toDouble() ?? 0);
       return pokemon;
     } else {
-      throw Exception('Erro ao carregar Pokemons');
+      throw Exception('Erro ao carregar os detalhes do Pokemons');
     }
   }
 
@@ -158,8 +158,8 @@ class PokemonRepository with ChangeNotifier {
       final Pokemon pokemon = Pokemon(
           id: json["id"],
           name: json["name"],
-          height: json["height"] * 10,
-          weight: json["weight"] / 10,
+          height: json["height"] * 10.toDouble(),
+          weight: json["weight"] / 10.toDouble(),
           image: json["sprites"]["other"]["home"]["front_default"] ??
               'https://cdn-icons-png.flaticon.com/512/4063/4063871.png',
           type: pokemonTypes.first,

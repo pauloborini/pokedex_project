@@ -6,7 +6,7 @@ import 'package:pokedex_inicie/generated/assets.dart';
 import 'package:pokedex_inicie/utils/constants.dart';
 
 class ProfileBody extends StatelessWidget {
-  ProfileBody({super.key});
+  const ProfileBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +77,42 @@ class ProfileBody extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.w600)),
                   const SizedBox(height: 20),
-                  SkillsComponent(stat: 'Vida', color: colorsSkills[0], value: 187),
-                  SkillsComponent(stat: 'Defesa', color: colorsSkills[1], value: 155),
-                  SkillsComponent(stat: 'Ataque', color: colorsSkills[3], value: 190),
-                  SkillsComponent(stat: 'Velocidade', color: colorsSkills[2], value: 155),
                   SkillsComponent(
-                      stat: 'Ataque Especial', color: colorsSkills[4], value: 165),
+                    stat: 'Vida',
+                    color: colorsSkills[0],
+                    value: 187,
+                    valueText: '',
+                  ),
                   SkillsComponent(
-                      stat: 'Defesa Especial', color: colorsSkills[5], value: 172),
+                    stat: 'Defesa',
+                    color: colorsSkills[1],
+                    value: 155,
+                    valueText: '',
+                  ),
+                  SkillsComponent(
+                    stat: 'Ataque',
+                    color: colorsSkills[3],
+                    value: 190,
+                    valueText: '',
+                  ),
+                  SkillsComponent(
+                    stat: 'Velocidade',
+                    color: colorsSkills[2],
+                    value: 155,
+                    valueText: '',
+                  ),
+                  SkillsComponent(
+                    stat: 'Ataque Especial',
+                    color: colorsSkills[4],
+                    value: 165,
+                    valueText: '',
+                  ),
+                  SkillsComponent(
+                    stat: 'Defesa Especial',
+                    color: colorsSkills[5],
+                    value: 172,
+                    valueText: '',
+                  ),
                 ],
               ),
             )
@@ -93,13 +121,4 @@ class ProfileBody extends StatelessWidget {
       ),
     );
   }
-
-  final colorsSkills = [
-    const Color(0xFFC4F789),
-    const Color(0xFFF7802A),
-    const Color(0xFF49D0B0),
-    const Color(0xFFEA686D),
-    const Color(0xFF85ABD9),
-    const Color(0xFFFDEF51),
-  ];
 }

@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     List body = [
       const HomeBody(),
       const FavoritesBody(),
-      ProfileBody(),
+      const ProfileBody(),
     ];
     return Responsive.isXTest(context)
         ? Scaffold(
