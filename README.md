@@ -57,6 +57,9 @@ pois é melhor aplicado em nuvem).
   envia os dados parcialmente, apenas todos os Pokémons daquele TIPO específico).
 - Um Easter Egg.
 
+### Mais detalhes na Documentação ([Link Aqui](Documenta%E7%E3o%20Pok%E9dex%20Inicie.pdf)).
+
+
 ---
 <h3 align="left">Connect with me:</h3>
 <p align="left">
